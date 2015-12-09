@@ -21,4 +21,22 @@ describe('server', function() {
       done();
     });
   });
+
+  it('prints user page on /user/:user', function(done){
+    superagent.get('http://localhost:3000/user/mongodb/', function(error, res){
+      assert.ifError(error);
+      assert.equal(res.status, 200);
+      assert.equal(res.text, "Page for user mongodb with option undefined");
+      done();
+    });
+  });
+
+  it('prints query option on /user/:user?...', function(done){
+    superagent.get('http://localhost:3000/user/mongodb?option=test', function(error, res){
+      assert.ifError(error);
+      assert.equal(res.status, 200);
+      assert.equal(res.text, "Page for user mongodb with option test");
+      done();
+    });
+  });
 });
