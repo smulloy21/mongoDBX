@@ -5,6 +5,7 @@
     "mocha": "2.2.4",
     "superagent": "1.2.0",
     "mongoose": "4.0.3",
+    "underscore": "1.5.2",
     "wagner-core": "0.0.7"
   },
   "scripts": {
