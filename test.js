@@ -7,7 +7,7 @@ var wagner = require('wagner-core');
 var URL_ROOT = 'http://localhost:3000';
 var PRODUCT_ID = '000000000000000000000001';
 
-describe('Category API', function() {
+describe('APIs', function() {
   var server;
   var Category;
   var Product;
@@ -22,10 +22,19 @@ describe('Category API', function() {
     dependencies = require('./dependencies')(wagner);
 
     // Make models available in tests
-    Category = models.Category;
-    Product = models.Product;
-    Stripe = dependencies.Stripe;
-    User = models.User;
+    var deps = wagner.invoke(function(Category, Product, Stripe, User) {
+      return {
+        Category: Category,
+        Product: Product,
+        Stripe: Stripe,
+        User: User
+      };
+    });
+
+    Category = deps.Category;
+    Product = deps.Product;
+    Stripe = deps.Stripe;
+    User = deps.User;
 
     app.use(function(req, res, next) {
       User.findOne({}, function(error, user) {
